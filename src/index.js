@@ -3,10 +3,13 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import {BrowserRouter} from "react-router-dom";
+import {BrowserRouter as Route} from "react-router-dom"; //BrowserRouter yanına as Router yazıp router ile devam edebiliriz.
+//BrowserRouter nesnesini uygulamanın en dışına koymalıyız. Rooting işlemi yapabilmek için.
 
 ReactDOM.render(
-    <BrowserRouter><App /></BrowserRouter>, document.getElementById('root'));
+    <Route>
+        <App />
+        </Route>, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

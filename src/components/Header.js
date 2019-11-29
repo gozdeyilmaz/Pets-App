@@ -1,6 +1,8 @@
 import React from 'react';
 import {Link} from "react-router-dom";
 
+//Link geçerli url ile eşleştiğinde render edilmiş elemente css ekler
+
 function Header() {
     return (
         <div>
@@ -10,7 +12,7 @@ function Header() {
                     <div className="collapse navbar-collapse" id="navbarResponsive">
                         <ul className="navbar-nav ml-auto">
                             <li className="nav-item">
-                                <Link className="nav-link" to="/">HomePage</Link>
+                                <Link className="nav-link" to="/">HomePage</Link> 
                             </li>
                             <li className="nav-item">
                                 <Link className="nav-link" to="/favoriler">Favoriler</Link>

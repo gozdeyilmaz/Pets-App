@@ -10,7 +10,9 @@ class HomePage extends React.Component{
             searchValue: ""
         }
     }
-
+    petIdCallback = (id) => {
+        this.props.petIdCallback(id)
+    }
     componentDidMount() {
         document.title = "Home Page";
     }
@@ -38,7 +40,7 @@ class HomePage extends React.Component{
                     <div className="row">
                         <div className="col-lg-3">
                             <Sidebar
-                                onFilterPets={this.filterPets}
+                                filterPets={this.filterPets} 
                                 activeFilter={this.state.activeFilter}
                                 onSearch={this.search}
                             />
@@ -47,6 +49,7 @@ class HomePage extends React.Component{
                             <PetList
                                 activeFilter={this.state.activeFilter}
                                 searchValue={this.state.searchValue}
+                                petIdCallback={this.petIdCallback}
                             />
                         </div>
                     </div>

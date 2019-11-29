@@ -27,8 +27,10 @@ function Filters(props) {
                             )}
                             onClick={(e) => {
                                 e.preventDefault();
-                                props.onFilterPets(breed);
+                                props.onFilterPets(breed); //click olunca listeyi filtrele.
                             }}>{breed}</li>
+                            // filters sidebarın çocuğu olduğu için sidebarda böyle bir fonksiyon geçmem lazım. (props olarak)
+                            // <Filters onFilterPets={props.onFilterPets} />
                     })
                 }
             </ul>

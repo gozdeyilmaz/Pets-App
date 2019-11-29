@@ -22,8 +22,8 @@ class Search extends React.Component{
             <div>
                 <h4>Arama</h4>
                 <input type="text"
-                       value={this.state.value}
-                       onChange={this.changeValue}
+                    value={this.state.value}
+                    onChange={this.changeValue}
                 />
             </div>
         );

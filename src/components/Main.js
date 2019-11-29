@@ -1,16 +1,30 @@
-import React from 'react';
-import {Route, Switch} from "react-router";
-import {FavoritesPage, HomePage} from "../pages";
+import React, { Component } from 'react'
+import { Route, Switch } from "react-router";
+import { FavoritesPage, HomePage, CharPage, ErrorPage } from "../pages";
 
-function Main(props) {
-    return (
-        <div>
-            <Switch>
-                <Route exact path="/" component={HomePage}/>
-                <Route exact path="/favoriler" component={FavoritesPage}/>
+
+class Main extends Component {
+    constructor(props){
+        super(props);
+        this.state = {
+            petId: "" 
+        }
+    }
+    petIdCallback = (id) => {
+        this.setState({petId: id})
+    }
+    render() {
+        console.log(this.state.petId);
+        return (
+            <div>
+                <Switch>
+                <Route exact path="/" component={() => <HomePage petIdCallback = {this.petIdCallback}/>}/>
+                <Route exact path="/favoriler" component={FavoritesPage} />
+                <Route exact path="/char" component={() => <CharPage petId={this.state.petId}></CharPage>} />
+                <Route component={ErrorPage} />
             </Switch>
-        </div>
-    );
+            </div>
+        )
+    }
 }
-
 export default Main;

@@ -11,8 +11,12 @@ class PetList extends React.Component{
         this.state = {
             _pets: [],
             pets: [],
-            yukleniyor: true
+            yukleniyor: true,
+            loadCount: 4,
         }
+    }
+    petIdCallback = (id) => {
+        this.props.petIdCallback(id)
     }
 
     componentDidMount() {
@@ -25,7 +29,8 @@ class PetList extends React.Component{
         })
     }
 
-    componentDidUpdate(prevProps) {
+
+    componentDidUpdate(prevProps) { //activefilter propu değişti bunu bu method ile yakalarım. 
         if(prevProps.activeFilter !== this.props.activeFilter){
             this.filterPets();
         }
@@ -52,17 +57,39 @@ class PetList extends React.Component{
         }
     }
 
+    onscrollHandler = () => {
+        if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
+            const loadCount = this.state.loadCount;
+            const petsLength = this.state.pets.length;
+            if (loadCount < petsLength) {
+                this.setState({
+                    loadCount: loadCount + ((petsLength - loadCount >= 4) ? 4 : (petsLength - loadCount))
+                });
+            }
+        }
+    }
+    //sayfa aşağı indikçe çoğalır.
+
 
     render(){
+        window.onscroll = this.onscrollHandler;
         const Yukleniyor = <div>Yukleniyor</div>;
         const EmptyPets = <div>Bulunamadı</div>;
-        const Pets =  [<h3>Gösterilen Pet Sayısı: 5</h3>,<div className="row">
+        const slices = this.state.pets.slice(0, this.state.loadCount);
+        const Pets = 
+        <React.Fragment>
+            <h3>Gösterilen Pet Sayısı: {slices.length} {/* toplamda kaç pet olduğu */}
+            </h3>
+            <div className="row">
             {
-                this.state.pets.map((pet) => {
-                    return <Pet key={Math.random()} {...pet} />
+                slices.map((pet) => {
+                    return <Pet petIdCallback={this.petIdCallback} key={pet.id} {...pet} />
                 })
+                
             }
-        </div>];
+            </div>
+        </React.Fragment>
+        
         if(this.state.yukleniyor){
             return Yukleniyor;
         }else if(this.state.pets.length === 0){

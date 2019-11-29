@@ -7,7 +7,7 @@ function Sidebar(props) {
         <div>
             <Search onSearch={props.onSearch} />
             <Filters
-                onFilterPets={props.onFilterPets}
+                onFilterPets={props.filterPets} 
                 activeFilter={props.activeFilter}
             />
         </div>
